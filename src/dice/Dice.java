@@ -84,16 +84,16 @@ public class Dice {
     Integer bestStreak = 0;
     Integer critStreak = 0;
     for (Integer i = 0; i < bound; i++) {
-      Integer randomNumber = random.nextInt(100);
+      Integer randomNumber = random.nextInt(100) + 1;
       if (randomNumber < critRate) {
         critCount++;
         critStreak++;
 
         if (critStreak > bestStreak) {
           bestStreak = critStreak;
-        } else {
-          critStreak = 0;
         }
+      } else {
+        critStreak = 0;
       }
     }
 
