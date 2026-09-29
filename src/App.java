@@ -1,11 +1,19 @@
-import comptebancaire.CompteBancaire;
+import vehicule.Moto;
+import vehicule.Voiture;
 
 public class App {
 
   public static void main(String[] args) {
-    CompteBancaire compte = new CompteBancaire();
+    Voiture lambo = new Voiture("Lamborghini");
+    lambo.demarrer();
+    lambo.klaxonner();
+    lambo.marque("Peugeot");
+    lambo.afficher();
 
-    compte.deposer(2000);
-    System.out.println("Solde : " + compte.getSolde());
+    Moto yamaha = new Moto("Yamaha", true);
+    yamaha.demarrer();
+    System.out.println(yamaha.sideCar());
+    yamaha.marque("suzuki");
+    yamaha.afficher();
   }
 }
