@@ -1,4 +1,4 @@
 #!/bin/bash
 
-javac App.java
-java App
+javac Main.java
+java Main

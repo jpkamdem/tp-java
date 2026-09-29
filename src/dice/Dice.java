@@ -10,20 +10,18 @@ public class Dice {
   public static Random random = new Random();
 
   // 1. Menu
-  public static Integer menu(Integer choice) {
-    System.out.println("=== ARENA LEGENDS ===");
-    System.out.println("2. Calculer un rang");
-    System.out.println("3. Test de coup critique");
-    System.out.println("0. Quitter");
-
+  public static Integer menu() {
     List<Integer> validValues = Arrays.asList(0, 1, 2, 3);
+    Integer choice;
 
     do {
       System.out.println("=== ARENA LEGENDS ===");
+      System.out.println("1. Lancer un dé");
       System.out.println("2. Calculer un rang");
       System.out.println("3. Test de coup critique");
       System.out.println("0. Quitter");
       System.out.println("Donne une valeur valide");
+
       choice = sc.nextInt();
     } while (!validValues.contains(choice));
 
@@ -36,12 +34,14 @@ public class Dice {
   }
 
   // 2. Lancer un dé
-  public static Integer roll(Integer input) {
-    boolean belongsToRange = input >= 4 && input <= 20;
-    while (!belongsToRange) {
+  public static Integer roll() {
+    Integer input = 0;
+    boolean belongsToRange;
+    do {
       System.out.println("Donne un nombre de face entre 4 et 20");
       input = sc.nextInt();
-    }
+      belongsToRange = input >= 4 && input <= 20;
+    } while (!belongsToRange);
 
     return random.nextInt(input) + 1;
   }
@@ -91,10 +91,35 @@ public class Dice {
 
         if (critStreak > bestStreak) {
           bestStreak = critStreak;
+        } else {
+          critStreak = 0;
         }
       }
     }
 
-    Integer actualCritRate = (critCount / bound) * 100;
+    double actualCritRate = ((double) critCount / bound) * 100;
+    System.out.println("Sur " + bound + " tirages, il y a eu " + critCount + ".");
+    System.out.println("Meilleure série de coups critiques : " + bestStreak);
+    System.out.println("Taux critique réel : " + actualCritRate);
+  }
+
+  public static void game() {
+    Integer choice = menu();
+    switch (choice) {
+      case 1:
+        Integer result = roll();
+        System.out.println("Résultat du lancé de dé : " + result);
+        break;
+
+      case 2:
+        System.out.println("Donne une position dans un classement, à partir de 1 : ");
+        Integer input = sc.nextInt();
+        rank(input);
+        break;
+
+      case 3:
+        criticalCounter();
+        break;
+    }
   }
 }
