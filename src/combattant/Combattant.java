@@ -1,13 +1,13 @@
 package combattant;
 
-public class Combattant {
-  protected String name;
-  protected Integer pvMax;
-  protected Integer pv;
-  protected Integer attack;
-  protected Integer defence;
-  protected Integer[] dmgHistory = new Integer[5];
-  protected static Integer count = 0;
+abstract public class Combattant {
+  private String name;
+  private Integer pvMax;
+  private Integer pv;
+  private Integer attack;
+  private Integer defence;
+  private Integer[] dmgHistory = new Integer[5];
+  private static Integer count = 0;
 
   public Combattant(String name, Integer pvMax, Integer pv, Integer attack, Integer defence) {
     Combattant.count++;
@@ -37,47 +37,47 @@ public class Combattant {
     return validAttack;
   }
 
-  public String name() {
+  protected String name() {
     return name;
   }
 
-  public void name(String value) {
+  protected void name(String value) {
     name = value;
   }
 
-  public Integer pv() {
+  protected Integer pv() {
     return pv;
   }
 
-  public Integer pvMax() {
+  protected Integer pvMax() {
     return pvMax;
   }
 
-  public void pvMax(Integer value) {
+  protected void pvMax(Integer value) {
     pvMax = value;
   }
 
-  public Integer attack() {
+  protected Integer attack() {
     return attack;
   }
 
-  public void attack(Integer value) {
+  protected void attack(Integer value) {
     attack = value;
   }
 
-  public Integer defence() {
+  protected Integer defence() {
     return defence;
   }
 
-  public void defence(Integer value) {
+  protected void defence(Integer value) {
     defence = value;
   }
 
-  public Integer[] dmgHistory() {
+  protected Integer[] dmgHistory() {
     return dmgHistory;
   }
 
-  public void damage(Integer value) {
+  protected void damage(Integer value) {
     if (pv == 0) {
       System.out.println("Combattant déjà hors combat, dégats supplémentaires impossible");
       return;
@@ -104,7 +104,7 @@ public class Combattant {
     return;
   }
 
-  public void heal(Integer value) {
+  protected void heal(Integer value) {
     if (pv == 0) {
       System.out.println("Combattant déjà hors combat, soin impossible");
       return;
@@ -117,9 +117,12 @@ public class Combattant {
     pv += value;
 
     return;
+
   }
 
-  public void isKo() {
+  abstract protected Integer strike(Combattant target);
+
+  protected void isKo() {
     System.out.println(name + " [" + pv + "/" + pvMax + "] ATK " + attack + " DEF " + defence);
   }
 }
