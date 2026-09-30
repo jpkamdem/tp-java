@@ -115,17 +115,17 @@ abstract public class Combattant {
     return;
   }
 
-  protected void heal(Integer value) {
+  protected void heal(Double value) {
     if (pv == 0) {
       System.out.println("Combattant déjà hors combat, soin impossible");
       return;
     }
 
-    if ((pv += value) > pvMax) {
+    if ((pv + value) > pvMax) {
       pv = pvMax;
     }
 
-    pv += value;
+    pv = (int) (pv + value);
     return;
 
   }
