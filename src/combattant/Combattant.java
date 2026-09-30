@@ -88,11 +88,7 @@ abstract public class Combattant {
       damage = 1;
     }
 
-    for (int i = dmgHistory.length - 1; i > 0; i--) {
-      dmgHistory[i] = dmgHistory[i - 1];
-    }
-
-    dmgHistory[0] = damage;
+    updateDmgHistory(damage);
 
     if (pv <= damage) {
       pv = 0;
@@ -100,7 +96,22 @@ abstract public class Combattant {
     }
 
     pv -= damage;
+    return;
+  }
 
+  protected void defIgnore(Integer value, Integer percentage) {
+    Double ignoredDefence = defence * (percentage / 100.0);
+    Double effectiveDefence = defence - ignoredDefence;
+
+    Integer damage = (int) (value - effectiveDefence);
+
+    if (damage < 1) {
+      damage = 1;
+    }
+
+    updateDmgHistory(damage);
+
+    pv -= damage;
     return;
   }
 
@@ -115,14 +126,26 @@ abstract public class Combattant {
     }
 
     pv += value;
-
     return;
 
   }
 
-  abstract protected Integer strike(Combattant target);
-
-  protected void isKo() {
-    System.out.println(name + " [" + pv + "/" + pvMax + "] ATK " + attack + " DEF " + defence);
+  protected Boolean isKo() {
+    return pv > 1;
   }
+
+  @Override
+  public String toString() {
+    return getClass() + "  " + name + " [" + pv + "/" + pvMax + "] ATK " + attack + " DEF " + defence;
+  }
+
+  protected void updateDmgHistory(Integer damage) {
+    for (int i = dmgHistory.length - 1; i > 0; i--) {
+      dmgHistory[i] = dmgHistory[i - 1];
+    }
+
+    dmgHistory[0] = damage;
+  }
+
+  abstract protected Integer strike(Combattant target);
 }
