@@ -3,8 +3,9 @@ package combattant;
 import java.util.Random;
 
 public class Voleur extends Combattant {
-  Integer tauxDoubleCoup = 20;
-  Integer tauxEsquive = 15;
+  private Integer tauxDoubleCoup = 20;
+  private Integer tauxEsquive = 15;
+  public static Integer nbVictoiresVoleurs = 0;
 
   public Voleur(String nom, Integer pvMax, Integer pv, Integer attaque, Integer deefnse) {
     super(nom, pvMax, pv, attaque, deefnse);
@@ -15,8 +16,8 @@ public class Voleur extends Combattant {
   }
 
   @Override
-  protected Integer attaquer(Combattant cible) {
-    Integer degats = attaque();
+  public Integer attaquer(Combattant cible) {
+    Integer degats = getAttaque();
     Boolean doubleCoup = new Random().nextInt(100) + 1 < tauxDoubleCoup;
     if (doubleCoup) {
       cible.infligerDegats(degats);

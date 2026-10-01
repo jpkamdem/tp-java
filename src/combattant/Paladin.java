@@ -1,6 +1,8 @@
 package combattant;
 
 public class Paladin extends Guerrier {
+  public static Integer nbVictoiresPaladins = 0;
+
   public Paladin(String nom, Integer pvMax, Integer pv, Integer attaque, Integer defense) {
     super(nom, pvMax, pv, attaque, defense);
   }
@@ -11,8 +13,8 @@ public class Paladin extends Guerrier {
 
   @Override
   protected void infligerDegats(Integer valeur) {
-    Double valeurSoing = valeur * 0.1;
-    soin(valeurSoing);
+    Double valeurSoin = valeur * 0.1;
+    soin(valeurSoin);
     super.infligerDegats(valeur);
     return;
   }

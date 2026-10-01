@@ -8,6 +8,7 @@ abstract public class Combattant {
   private Integer defense;
   private Integer[] historiqueDegats = new Integer[5];
   private static Integer nbCombattant = 0;
+  private Integer nbVictoires = 0;
 
   public Combattant(String nom, Integer pvMax, Integer pv, Integer attaque, Integer defense) {
     Combattant.nbCombattant++;
@@ -37,43 +38,51 @@ abstract public class Combattant {
     return valeurAttaqueValide;
   }
 
-  protected String nom() {
+  protected String getNnom() {
     return nom;
   }
 
-  protected void nom(String valeur) {
+  protected void setNom(String valeur) {
     nom = valeur;
   }
 
-  protected Integer pv() {
+  protected Integer getPv() {
     return pv;
   }
 
-  protected Integer pvMax() {
+  public Boolean aUnMeilleurEtatDeSante(Combattant autre) {
+    return pv > autre.pv;
+  }
+
+  protected Integer getPvMax() {
     return pvMax;
   }
 
-  protected void pvMax(Integer valeur) {
+  protected void setPvMax(Integer valeur) {
     pvMax = valeur;
   }
 
-  protected Integer attaque() {
+  protected Integer getAttaque() {
     return attaque;
   }
 
-  protected void attaque(Integer valeur) {
+  public Boolean aUneAttaqueSuperieureA(Combattant autre) {
+    return attaque > autre.getAttaque();
+  }
+
+  protected void setAttaque(Integer valeur) {
     attaque = valeur;
   }
 
-  protected Integer defense() {
+  protected Integer getDefense() {
     return defense;
   }
 
-  protected void defense(Integer valeur) {
+  protected void setDefense(Integer valeur) {
     defense = valeur;
   }
 
-  protected Integer[] historiqueDegats() {
+  protected Integer[] getHistoriqueDegats() {
     return historiqueDegats;
   }
 
@@ -88,7 +97,7 @@ abstract public class Combattant {
       degats = 1;
     }
 
-    MAJhistoriqueDegats(degats);
+    majHistoriqueDegats(degats);
 
     if (pv <= degats) {
       pv = 0;
@@ -109,7 +118,7 @@ abstract public class Combattant {
       degats = 1;
     }
 
-    MAJhistoriqueDegats(degats);
+    majHistoriqueDegats(degats);
 
     pv -= degats;
     return;
@@ -130,8 +139,8 @@ abstract public class Combattant {
 
   }
 
-  protected Boolean estKo() {
-    return pv > 1;
+  public Boolean estKo() {
+    return pv <= 0;
   }
 
   @Override
@@ -139,7 +148,7 @@ abstract public class Combattant {
     return getClass() + "  " + nom + " [" + pv + "/" + pvMax + "] ATK " + attaque + " DEF " + defense;
   }
 
-  protected void MAJhistoriqueDegats(Integer damage) {
+  protected void majHistoriqueDegats(Integer damage) {
     for (int i = historiqueDegats.length - 1; i > 0; i--) {
       historiqueDegats[i] = historiqueDegats[i - 1];
     }
@@ -147,5 +156,13 @@ abstract public class Combattant {
     historiqueDegats[0] = damage;
   }
 
-  abstract protected Integer attaquer(Combattant target);
+  public void ajoutervictoire() {
+    nbVictoires++;
+  }
+
+  public Integer getVictoire() {
+    return nbVictoires;
+  }
+
+  abstract public Integer attaquer(Combattant target);
 }

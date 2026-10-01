@@ -2,6 +2,7 @@ package combattant;
 
 public class Mage extends Combattant {
   private Integer mana = 100;
+  public static Integer nbVictoiresMages = 0;
 
   public Mage(String nom, Integer pvMax, Integer pv, Integer attaque, Integer defense) {
     super(nom, pvMax, pv, attaque, defense);
@@ -17,7 +18,7 @@ public class Mage extends Combattant {
       return 0;
     }
 
-    Integer damage = attaque();
+    Integer damage = getAttaque();
     cible.infligerDegats(damage);
     mana += 15;
 
@@ -29,7 +30,7 @@ public class Mage extends Combattant {
       return 0;
     }
 
-    Integer damage = attaque() * 2;
+    Integer damage = getAttaque() * 2;
     cible.infligerDegatsIgnoreDefense(damage, 100);
     mana -= 30;
 
