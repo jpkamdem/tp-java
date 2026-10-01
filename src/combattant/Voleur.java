@@ -3,38 +3,38 @@ package combattant;
 import java.util.Random;
 
 public class Voleur extends Combattant {
-  Integer doubleHitRate = 20;
-  Integer evasionRate = 15;
+  Integer tauxDoubleCoup = 20;
+  Integer tauxEsquive = 15;
 
-  public Voleur(String name, Integer pvMax, Integer pv, Integer attack, Integer defence) {
-    super(name, pvMax, pv, attack, defence);
+  public Voleur(String nom, Integer pvMax, Integer pv, Integer attaque, Integer deefnse) {
+    super(nom, pvMax, pv, attaque, deefnse);
   }
 
-  public Voleur createVoleur(String name, Integer pvMax, Integer pv, Integer attack, Integer defence) {
-    return new Voleur(name, pvMax, pv, attack, defence);
+  public Voleur nouveauVoleur(String nom, Integer pvMax, Integer pv, Integer attaque, Integer deefnse) {
+    return new Voleur(nom, pvMax, pv, attaque, deefnse);
   }
 
   @Override
-  protected Integer strike(Combattant target) {
-    Integer damage = attack();
-    Boolean doubleHit = new Random().nextInt(100) + 1 < doubleHitRate;
+  protected Integer attaquer(Combattant cible) {
+    Integer damage = attaque();
+    Boolean doubleHit = new Random().nextInt(100) + 1 < tauxDoubleCoup;
     if (doubleHit) {
-      target.damage(damage);
+      cible.infligerDegats(damage);
     }
 
-    target.damage(damage);
+    cible.infligerDegats(damage);
     return damage;
   }
 
   @Override
-  protected void damage(Integer value) {
-    Integer maybeEvasion = new Random().nextInt(100) + 1;
-    if (maybeEvasion < evasionRate) {
+  protected void infligerDegats(Integer valeur) {
+    Integer evasionReussie = new Random().nextInt(100) + 1;
+    if (evasionReussie < tauxEsquive) {
       System.out.println("L'attaque a été esquivée");
       return;
     }
 
-    super.damage(value);
+    super.infligerDegats(valeur);
     return;
   }
 }
