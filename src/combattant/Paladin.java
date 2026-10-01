@@ -1,15 +1,15 @@
 package combattant;
 
 public class Paladin extends Guerrier {
-  public Paladin(String name, Integer pvMax, Integer pv, Integer attack, Integer defence) {
-    super(name, pvMax, pv, attack, defence);
+  public Paladin(String nom, Integer pvMax, Integer pv, Integer attaque, Integer defense) {
+    super(nom, pvMax, pv, attaque, defense);
   }
 
   @Override
-  protected void damage(Integer value) {
-    Double healValue = value * 0.1;
-    heal(healValue);
-    super.damage(value);
+  protected void infligerDegats(Integer valeur) {
+    Double valeurSoing = valeur * 0.1;
+    soin(valeurSoing);
+    super.infligerDegats(valeur);
     return;
   }
 }

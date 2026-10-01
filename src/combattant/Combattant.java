@@ -1,48 +1,48 @@
 package combattant;
 
 abstract public class Combattant {
-  private String name;
+  private String nom;
   private Integer pvMax;
   private Integer pv;
-  private Integer attack;
-  private Integer defence;
-  private Integer[] dmgHistory = new Integer[5];
-  private static Integer count = 0;
+  private Integer attaque;
+  private Integer defense;
+  private Integer[] historiqueDegats = new Integer[5];
+  private static Integer nbCombattant = 0;
 
-  public Combattant(String name, Integer pvMax, Integer pv, Integer attack, Integer defence) {
-    Combattant.count++;
-    this.name = name;
+  public Combattant(String nom, Integer pvMax, Integer pv, Integer attaque, Integer defense) {
+    Combattant.nbCombattant++;
+    this.nom = nom;
     this.pvMax = pvMax;
     this.pv = pv;
-    this.attack = attack;
-    this.defence = defence;
+    this.attaque = attaque;
+    this.defense = defense;
 
-    if (!validAttack()) {
-      throw new IllegalArgumentException("attaque doit être entre 5 et 50, reçu : " + attack);
+    if (!valeurAttaqueValide()) {
+      throw new IllegalArgumentException("attaque doit être entre 5 et 50, reçu : " + attaque);
     }
 
-    if (!validPvs()) {
+    if (!valeurPvValide()) {
       throw new IllegalArgumentException("PvMax Entre 50 et 300, pv toujours entre 0 et pvMax");
     }
   }
 
-  protected Boolean validPvs() {
-    Boolean validPvMax = this.pvMax >= 50 && pvMax <= 300;
-    Boolean validPv = pv >= 0 && pv <= pvMax;
-    return validPv && validPvMax;
+  protected Boolean valeurPvValide() {
+    Boolean pvMaxValide = this.pvMax >= 50 && pvMax <= 300;
+    Boolean pvValide = pv >= 0 && pv <= pvMax;
+    return pvValide && pvMaxValide;
   }
 
-  protected Boolean validAttack() {
-    Boolean validAttack = attack >= 5 && attack <= 50;
-    return validAttack;
+  protected Boolean valeurAttaqueValide() {
+    Boolean valeurAttaqueValide = attaque >= 5 && attaque <= 50;
+    return valeurAttaqueValide;
   }
 
-  protected String name() {
-    return name;
+  protected String nom() {
+    return nom;
   }
 
-  protected void name(String value) {
-    name = value;
+  protected void nom(String valeur) {
+    nom = valeur;
   }
 
   protected Integer pv() {
@@ -53,99 +53,99 @@ abstract public class Combattant {
     return pvMax;
   }
 
-  protected void pvMax(Integer value) {
-    pvMax = value;
+  protected void pvMax(Integer valeur) {
+    pvMax = valeur;
   }
 
-  protected Integer attack() {
-    return attack;
+  protected Integer attaque() {
+    return attaque;
   }
 
-  protected void attack(Integer value) {
-    attack = value;
+  protected void attaque(Integer valeur) {
+    attaque = valeur;
   }
 
-  protected Integer defence() {
-    return defence;
+  protected Integer defense() {
+    return defense;
   }
 
-  protected void defence(Integer value) {
-    defence = value;
+  protected void defense(Integer valeur) {
+    defense = valeur;
   }
 
-  protected Integer[] dmgHistory() {
-    return dmgHistory;
+  protected Integer[] historiqueDegats() {
+    return historiqueDegats;
   }
 
-  protected void damage(Integer value) {
+  protected void infligerDegats(Integer valeur) {
     if (pv == 0) {
       System.out.println("Combattant déjà hors combat, dégats supplémentaires impossible");
       return;
     }
 
-    Integer damage = value - defence;
-    if (damage < 1) {
-      damage = 1;
+    Integer degats = valeur - defense;
+    if (degats < 1) {
+      degats = 1;
     }
 
-    updateDmgHistory(damage);
+    MAJhistoriqueDegats(degats);
 
-    if (pv <= damage) {
+    if (pv <= degats) {
       pv = 0;
       System.out.println("Combattant hors combat");
     }
 
-    pv -= damage;
+    pv -= degats;
     return;
   }
 
-  protected void defIgnore(Integer value, Integer percentage) {
-    Double ignoredDefence = defence * (percentage / 100.0);
-    Double effectiveDefence = defence - ignoredDefence;
+  protected void infligerDegatsIgnoreDefense(Integer valeur, Integer pourcentage) {
+    Double defenseIgnoree = defense * (pourcentage / 100.0);
+    Double defenseReelle = defense - defenseIgnoree;
 
-    Integer damage = (int) (value - effectiveDefence);
+    Integer degats = (int) (valeur - defenseReelle);
 
-    if (damage < 1) {
-      damage = 1;
+    if (degats < 1) {
+      degats = 1;
     }
 
-    updateDmgHistory(damage);
+    MAJhistoriqueDegats(degats);
 
-    pv -= damage;
+    pv -= degats;
     return;
   }
 
-  protected void heal(Double value) {
+  protected void soin(Double valeur) {
     if (pv == 0) {
       System.out.println("Combattant déjà hors combat, soin impossible");
       return;
     }
 
-    if ((pv + value) > pvMax) {
+    if ((pv + valeur) > pvMax) {
       pv = pvMax;
     }
 
-    pv = (int) (pv + value);
+    pv = (int) (pv + valeur);
     return;
 
   }
 
-  protected Boolean isKo() {
+  protected Boolean estKo() {
     return pv > 1;
   }
 
   @Override
   public String toString() {
-    return getClass() + "  " + name + " [" + pv + "/" + pvMax + "] ATK " + attack + " DEF " + defence;
+    return getClass() + "  " + nom + " [" + pv + "/" + pvMax + "] ATK " + attaque + " DEF " + defense;
   }
 
-  protected void updateDmgHistory(Integer damage) {
-    for (int i = dmgHistory.length - 1; i > 0; i--) {
-      dmgHistory[i] = dmgHistory[i - 1];
+  protected void MAJhistoriqueDegats(Integer damage) {
+    for (int i = historiqueDegats.length - 1; i > 0; i--) {
+      historiqueDegats[i] = historiqueDegats[i - 1];
     }
 
-    dmgHistory[0] = damage;
+    historiqueDegats[0] = damage;
   }
 
-  abstract protected Integer strike(Combattant target);
+  abstract protected Integer attaquer(Combattant target);
 }

@@ -3,34 +3,34 @@ package combattant;
 public class Mage extends Combattant {
   private Integer mana = 100;
 
-  public Mage(String name, Integer pvMax, Integer pv, Integer attack, Integer defence) {
-    super(name, pvMax, pv, attack, defence);
+  public Mage(String nom, Integer pvMax, Integer pv, Integer attaque, Integer defense) {
+    super(nom, pvMax, pv, attaque, defense);
   }
 
-  public Mage createMage(String name, Integer pvMax, Integer pv, Integer attack, Integer defence) {
-    return new Mage(name, pvMax, pv, attack, defence);
+  public Mage nouveauMage(String nom, Integer pvMax, Integer pv, Integer attaque, Integer defense) {
+    return new Mage(nom, pvMax, pv, attaque, defense);
   }
 
   @Override
-  public Integer strike(Combattant target) {
+  public Integer attaquer(Combattant cible) {
     if (mana >= 30) {
       return 0;
     }
 
-    Integer damage = attack();
-    target.damage(damage);
+    Integer damage = attaque();
+    cible.infligerDegats(damage);
     mana += 15;
 
     return damage;
   }
 
-  public Integer buffedStrike(Combattant target) {
+  public Integer buffedStrike(Combattant cible) {
     if (mana < 30) {
       return 0;
     }
 
-    Integer damage = attack() * 2;
-    target.defIgnore(damage, 100);
+    Integer damage = attaque() * 2;
+    cible.infligerDegatsIgnoreDefense(damage, 100);
     mana -= 30;
 
     return damage;

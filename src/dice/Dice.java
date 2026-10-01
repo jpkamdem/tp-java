@@ -55,7 +55,7 @@ public class Dice {
 
     Integer rangBronze = 100;
     Integer rangArgent = 500;
-    Integer goldRank = 1500;
+    Integer rangOr = 1500;
 
     if (position < rangBronze) {
       System.out.println("Rang du personnage : Bronze");
@@ -67,48 +67,48 @@ public class Dice {
       return;
     }
 
-    if (position < goldRank) {
-      System.out.println("Rang du personnage : Gold");
+    if (position < rangOr) {
+      System.out.println("Rang du personnage : Or");
       return;
     }
 
-    System.out.println("Rang du personnage : Legend");
+    System.out.println("Rang du personnage : Légende");
     return;
   }
 
   // 4. Test de coup critique
-  public static void criticalCounter() {
-    Integer critRate = 15;
-    Integer critCount = 0;
+  public static void compteurCritique() {
+    Integer tauxCritique = 15;
+    Integer nbCoupsCritiques = 0;
     Integer bound = 10000;
-    Integer bestStreak = 0;
-    Integer critStreak = 0;
+    Integer meilleureSerieCritique = 0;
+    Integer serieCritiqueActuelle = 0;
     for (Integer i = 0; i < bound; i++) {
-      Integer randomNumber = random.nextInt(100) + 1;
-      if (randomNumber < critRate) {
-        critCount++;
-        critStreak++;
+      Integer nombreAuHasard = random.nextInt(100) + 1;
+      if (nombreAuHasard < tauxCritique) {
+        nbCoupsCritiques++;
+        serieCritiqueActuelle++;
 
-        if (critStreak > bestStreak) {
-          bestStreak = critStreak;
+        if (serieCritiqueActuelle > meilleureSerieCritique) {
+          meilleureSerieCritique = serieCritiqueActuelle;
         }
       } else {
-        critStreak = 0;
+        serieCritiqueActuelle = 0;
       }
     }
 
-    double actualCritRate = ((double) critCount / bound) * 100;
-    System.out.println("Sur " + bound + " tirages, il y a eu " + critCount + ".");
-    System.out.println("Meilleure série de coups critiques : " + bestStreak);
-    System.out.println("Taux critique réel : " + actualCritRate);
+    double tauxCritiqueReel = ((double) nbCoupsCritiques / bound) * 100;
+    System.out.println("Sur " + bound + " tirages, il y a eu " + nbCoupsCritiques + ".");
+    System.out.println("Meilleure série de coups critiques : " + meilleureSerieCritique);
+    System.out.println("Taux critique réel : " + tauxCritiqueReel);
   }
 
   public static void game() {
     Integer choix = menu();
     switch (choix) {
       case 1:
-        Integer result = roll();
-        System.out.println("Résultat du lancé de dé : " + result);
+        Integer resultat = roll();
+        System.out.println("Résultat du lancé de dé : " + resultat);
         break;
 
       case 2:
@@ -118,7 +118,7 @@ public class Dice {
         break;
 
       case 3:
-        criticalCounter();
+        compteurCritique();
         break;
     }
   }

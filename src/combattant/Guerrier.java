@@ -3,24 +3,24 @@ package combattant;
 public class Guerrier extends Combattant {
   private Integer rage = 0;
 
-  public Guerrier(String name, Integer pvMax, Integer pv, Integer attack, Integer defence) {
-    super(name, pvMax, pv, attack, defence);
+  public Guerrier(String nom, Integer pvMax, Integer pv, Integer attaque, Integer defense) {
+    super(nom, pvMax, pv, attaque, defense);
   }
 
-  public Guerrier createGuerrier(String name, Integer pvMax, Integer pv, Integer attack, Integer defence) {
-    return new Guerrier(name, pvMax, pv, attack, defence);
+  public Guerrier nouveauGuerrier(String nom, Integer pvMax, Integer pv, Integer attaque, Integer defense) {
+    return new Guerrier(nom, pvMax, pv, attaque, defense);
   }
 
   @Override
-  public Integer strike(Combattant target) {
+  public Integer attaquer(Combattant cible) {
     rage += 20;
-    Integer damage = attack();
+    Integer degats = attaque();
     if (rage == 100) {
-      damage = attack() * 2;
-      target.damage(attack());
+      degats = attaque() * 2;
+      cible.infligerDegats(degats);
       rage = 0;
     }
 
-    return damage;
+    return degats;
   }
 }
