@@ -16,14 +16,14 @@ public class Voleur extends Combattant {
 
   @Override
   protected Integer attaquer(Combattant cible) {
-    Integer damage = attaque();
-    Boolean doubleHit = new Random().nextInt(100) + 1 < tauxDoubleCoup;
-    if (doubleHit) {
-      cible.infligerDegats(damage);
+    Integer degats = attaque();
+    Boolean doubleCoup = new Random().nextInt(100) + 1 < tauxDoubleCoup;
+    if (doubleCoup) {
+      cible.infligerDegats(degats);
     }
 
-    cible.infligerDegats(damage);
-    return damage;
+    cible.infligerDegats(degats);
+    return degats;
   }
 
   @Override
