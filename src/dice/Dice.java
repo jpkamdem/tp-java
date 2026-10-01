@@ -11,8 +11,8 @@ public class Dice {
 
   // 1. Menu
   public static Integer menu() {
-    List<Integer> validValues = Arrays.asList(0, 1, 2, 3);
-    Integer choice;
+    List<Integer> valeursAcceptees = Arrays.asList(0, 1, 2, 3);
+    Integer choix;
 
     do {
       System.out.println("=== ARENA LEGENDS ===");
@@ -22,48 +22,48 @@ public class Dice {
       System.out.println("0. Quitter");
       System.out.println("Donne une valeur valide");
 
-      choice = sc.nextInt();
-    } while (!validValues.contains(choice));
+      choix = sc.nextInt();
+    } while (!valeursAcceptees.contains(choix));
 
-    if (choice.equals(0)) {
+    if (choix.equals(0)) {
       System.out.println("Fin du programme souhaitée.");
       return 0;
     }
 
-    return choice;
+    return choix;
   }
 
   // 2. Lancer un dé
   public static Integer roll() {
     Integer input = 0;
-    boolean belongsToRange;
+    boolean respecteIntervalle;
     do {
       System.out.println("Donne un nombre de face entre 4 et 20");
       input = sc.nextInt();
-      belongsToRange = input >= 4 && input <= 20;
-    } while (!belongsToRange);
+      respecteIntervalle = input >= 4 && input <= 20;
+    } while (!respecteIntervalle);
 
     return random.nextInt(input) + 1;
   }
 
   // 3. Calculer un rang
-  public static void rank(Integer position) {
+  public static void rang(Integer position) {
     if (position.equals(0)) {
       System.out.println("Valeur invalide, fin de la partie.");
       return;
     }
 
-    Integer bronzeRank = 100;
-    Integer silverRank = 500;
+    Integer rangBronze = 100;
+    Integer rangArgent = 500;
     Integer goldRank = 1500;
 
-    if (position < bronzeRank) {
+    if (position < rangBronze) {
       System.out.println("Rang du personnage : Bronze");
       return;
     }
 
-    if (position < silverRank) {
-      System.out.println("Rang du personnage : Silver");
+    if (position < rangArgent) {
+      System.out.println("Rang du personnage : Argent");
       return;
     }
 
@@ -104,8 +104,8 @@ public class Dice {
   }
 
   public static void game() {
-    Integer choice = menu();
-    switch (choice) {
+    Integer choix = menu();
+    switch (choix) {
       case 1:
         Integer result = roll();
         System.out.println("Résultat du lancé de dé : " + result);
@@ -114,7 +114,7 @@ public class Dice {
       case 2:
         System.out.println("Donne une position dans un classement, à partir de 1 : ");
         Integer input = sc.nextInt();
-        rank(input);
+        rang(input);
         break;
 
       case 3:
