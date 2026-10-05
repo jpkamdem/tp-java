@@ -102,13 +102,14 @@ public class Tournoi {
     Combattant vainqueur = premierCombattant.aUnMeilleurEtatDeSante(secondCombattant) ? premierCombattant
         : secondCombattant;
     Combattant perdant = (vainqueur == premierCombattant) ? secondCombattant : premierCombattant;
-    System.out.println("Vainqueur = " + vainqueur);
     terminerDuel(vainqueur, perdant);
   }
 
   private final Map<Class<? extends Combattant>, Integer> victoiresParClasse = new HashMap<>();
 
   private void terminerDuel(Combattant vainqueur, Combattant perdant) {
+    System.out.println("Vainqueur du duel : " + vainqueur.toString());
+    System.out.println("Perdant : " + perdant.toString());
     vainqueur.ajoutervictoire();
     victoiresParClasse.merge(vainqueur.getClass(), 1, Integer::sum);
     desinscrire(perdant);
@@ -134,7 +135,7 @@ public class Tournoi {
       for (Integer i = 0; i + 1 < tirage.size(); i += 2) {
         Combattant premiCombattant = tirage.get(i);
         Combattant secondCombattant = tirage.get(i + 1);
-        System.out.println("--- " + premiCombattant.toString() + " vs " + secondCombattant.toString());
+        System.out.println("--- " + premiCombattant.toString() + " vs " + secondCombattant.toString() + " ===");
         duel(premiCombattant, secondCombattant);
       }
       round++;

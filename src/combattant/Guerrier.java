@@ -16,12 +16,13 @@ public class Guerrier extends Combattant {
   public Integer attaquer(Combattant cible) {
     rage += 20;
     Integer degats = getAttaque();
-    if (rage == 100) {
-      degats = getAttaque() * 2;
-      cible.infligerDegats(degats);
+    if (rage >= 100) {
+      System.out.println("La rage du Guerrier " + getNom() + " s'active !");
+      degats *= 2;
       rage = 0;
     }
 
+    cible.infligerDegats(degats);
     return degats;
   }
 }

@@ -6,7 +6,7 @@ public class Main {
     Tournoi tournoi = new Tournoi().creerTournoi();
     Combattant champion = tournoi.lancer();
     System.out.println("CHAMPION : " + champion);
-    System.out.println("--- Classsement ---");
+    System.out.println("--- Classement ---");
     tournoi.classement().forEach(System.out::println);
     tournoi.statsParClasse();
   }

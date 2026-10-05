@@ -14,6 +14,7 @@ public class Paladin extends Guerrier {
   @Override
   protected void infligerDegats(Integer valeur) {
     Double valeurSoin = valeur * 0.1;
+    System.out.println("Le Paladin " + getNom() + " se soigne !");
     soin(valeurSoin);
     super.infligerDegats(valeur);
     return;

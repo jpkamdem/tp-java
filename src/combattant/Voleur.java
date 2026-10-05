@@ -20,6 +20,7 @@ public class Voleur extends Combattant {
     Integer degats = getAttaque();
     Boolean doubleCoup = new Random().nextInt(100) + 1 < tauxDoubleCoup;
     if (doubleCoup) {
+      System.out.println("Double frappe du Voleur " + getNom() + " !");
       cible.infligerDegats(degats);
     }
 
@@ -31,7 +32,8 @@ public class Voleur extends Combattant {
   protected void infligerDegats(Integer valeur) {
     Integer evasionReussie = new Random().nextInt(100) + 1;
     if (evasionReussie < tauxEsquive) {
-      System.out.println("L'attaque a été esquivée");
+      System.out.println("dedededeeeeeeeee".repeat(22));
+      System.out.println("L'attaque a été esquivée par le Voleur " + getNom() + " !");
       return;
     }
 

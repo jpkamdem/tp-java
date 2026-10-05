@@ -38,7 +38,7 @@ abstract public class Combattant {
     return valeurAttaqueValide;
   }
 
-  protected String getNnom() {
+  protected String getNom() {
     return nom;
   }
 

@@ -14,26 +14,18 @@ public class Mage extends Combattant {
 
   @Override
   public Integer attaquer(Combattant cible) {
-    if (mana >= 30) {
-      return 0;
-    }
-
-    Integer damage = getAttaque();
-    cible.infligerDegats(damage);
-    mana += 15;
-
-    return damage;
-  }
-
-  public Integer buffedStrike(Combattant cible) {
     if (mana < 30) {
-      return 0;
+      Integer degats = getAttaque() / 2;
+      System.out.println("Manque de mana du Mage " + getNom() + ", dégâts amoindri !");
+      cible.infligerDegats(degats);
+      mana += 15;
+      return degats;
     }
 
-    Integer damage = getAttaque() * 2;
-    cible.infligerDegatsIgnoreDefense(damage, 100);
+    Integer degats = getAttaque() * 2;
+    System.out.println("Dégâts énormes du Mage " + getNom() + " !");
+    cible.infligerDegatsIgnoreDefense(degats, 100);
     mana -= 30;
-
-    return damage;
+    return degats;
   }
 }
