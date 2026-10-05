@@ -2,7 +2,7 @@ package combattant;
 
 public class Guerrier extends Combattant {
   private Integer rage = 0;
-  public static Integer nbVictoiresGuerrier = 0;
+  public static Integer nbVictoiresClasse = 0;
 
   public Guerrier(String nom, Integer pvMax, Integer pv, Integer attaque, Integer defense) {
     super(nom, pvMax, pv, attaque, defense);

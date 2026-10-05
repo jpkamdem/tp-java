@@ -5,7 +5,7 @@ import java.util.Random;
 public class Voleur extends Combattant {
   private Integer tauxDoubleCoup = 20;
   private Integer tauxEsquive = 15;
-  public static Integer nbVictoiresVoleurs = 0;
+  public static Integer nbVictoiresClasse = 0;
 
   public Voleur(String nom, Integer pvMax, Integer pv, Integer attaque, Integer deefnse) {
     super(nom, pvMax, pv, attaque, deefnse);

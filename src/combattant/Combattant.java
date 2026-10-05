@@ -145,7 +145,7 @@ abstract public class Combattant {
 
   @Override
   public String toString() {
-    return getClass() + "  " + nom + " [" + pv + "/" + pvMax + "] ATK " + attaque + " DEF " + defense;
+    return getClass().getSimpleName() + "  " + nom + " [" + pv + "/" + pvMax + "] ATK " + attaque + " DEF " + defense;
   }
 
   protected void majHistoriqueDegats(Integer damage) {
@@ -164,5 +164,5 @@ abstract public class Combattant {
     return nbVictoires;
   }
 
-  abstract public Integer attaquer(Combattant target);
+  public abstract Integer attaquer(Combattant target);
 }

@@ -2,7 +2,7 @@ package combattant;
 
 public class Mage extends Combattant {
   private Integer mana = 100;
-  public static Integer nbVictoiresMages = 0;
+  public static Integer nbVictoiresClasse = 0;
 
   public Mage(String nom, Integer pvMax, Integer pv, Integer attaque, Integer defense) {
     super(nom, pvMax, pv, attaque, defense);

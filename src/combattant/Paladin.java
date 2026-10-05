@@ -1,7 +1,7 @@
 package combattant;
 
 public class Paladin extends Guerrier {
-  public static Integer nbVictoiresPaladins = 0;
+  public static Integer nbVictoiresClasse = 0;
 
   public Paladin(String nom, Integer pvMax, Integer pv, Integer attaque, Integer defense) {
     super(nom, pvMax, pv, attaque, defense);
